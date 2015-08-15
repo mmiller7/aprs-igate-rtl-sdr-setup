@@ -27,7 +27,9 @@ if ! [[ "$chan" =~ '^[0-9]+$' ]] ; then
    #round to integer
    ppm=$(echo "($ppm_f+0.5)/1" | bc)
    echo "rounded ppm = $ppm"
+   #at this point, $ppm should be the correct integer ppm value
 else
    echo "ERROR: Failed to get base channel!" >&2; exit 1
+   ppm=0
 fi
 
