@@ -5,8 +5,7 @@
 # Required data includes ppm, gain, callsign, aprsKey, lat, lon
 
 RTL_BUILD_DIR=~/rtl_build
-#CONFIG_FILE="/etc/pymultimonaprs.json"
-CONFIG_FILE="/home/aprs/pymultimonaprs.json.example"
+CONFIG_FILE="/etc/pymultimonaprs.json"
 freq=144.39
 default_gain=39
 aprs_gateway="noam.aprs2.net"
