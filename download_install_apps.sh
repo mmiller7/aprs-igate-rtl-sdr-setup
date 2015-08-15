@@ -3,7 +3,7 @@
 # 12AUG2015
 # Downloads, builds, and installs software to build an APRS iGate using a RTL-SDR USB SDR
 
-BUILD_TEMP_DIR=~/rtl_build_temp
+RTL_BUILD_DIR=~/rtl_build
 
 if [ "$(whoami)" != "root" ]; then
 	echo "ERROR: This script be run as root!"
@@ -38,13 +38,13 @@ blacklist rtl_2830' >> $BLACKLIST_PATH
 
 
 #Create RTL-SDR directory
-mkdir $BUILD_TEMP_DIR
+mkdir $RTL_BUILD_DIR
 
 
 
 #Build new driver
 echo '**** Fetching RTL-SDR driver module ****'
-cd $BUILD_TEMP_DIR
+cd $RTL_BUILD_DIR
 git clone git://git.osmocom.org/rtl-sdr.git
 cd rtl-sdr
 mkdir build
@@ -60,7 +60,7 @@ ldconfig
 
 #Install Kalibrate-RTL
 echo '**** Fetching Kalibrate-RTL ****'
-cd $BUILD_TEMP_DIR
+cd $RTL_BUILD_DIR
 git clone https://github.com/asdil12/kalibrate-rtl.git
 cd kalibrate-rtl
 git checkout arm_memory
@@ -75,7 +75,7 @@ make install
 
 #Install multimonNG decoder
 echo '**** Fetching multimonNG decoder ****'
-cd $BUILD_TEMP_DIR
+cd $RTL_BUILD_DIR
 git clone https://github.com/EliasOenal/multimonNG.git
 cd multimonNG
 mkdir build
@@ -91,7 +91,7 @@ make install
 
 #Install APRS iGate software
 echo '**** Fetching APRS iGate software ****'
-cd $BUILD_TEMP_DIR
+cd $RTL_BUILD_DIR
 git clone https://github.com/asdil12/pymultimonaprs.git
 cd pymultimonaprs
 echo '**** Building APRS iGate software ****'
@@ -102,7 +102,5 @@ python setup.py install
 
 
 #Done!
-echo '**** Cleaning up temporary files ****'
-rm -rf $BUILD_TEMP_DIR
 echo 'Install complete!'
 echo 'Please reboot and run config script . . .'
