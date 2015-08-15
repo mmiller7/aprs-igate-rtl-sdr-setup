@@ -5,6 +5,11 @@
 
 BUILD_TEMP_DIR=~/rtl_build_temp
 
+if [ "$(whoami)" != "root" ]; then
+	echo "ERROR: This script be run as root!"
+	exit 1
+fi
+
 # Based off of the following guide
 #http://www.algissalys.com/index.php/amateur-radio/88-raspberry-pi-sdr-dongle-aprs-igate
 
