@@ -119,6 +119,9 @@ cp pymultimonaprs /etc/init.d/
 useradd -r -s /sbin/nologin -M aprs
 echo '**** NOTE: pymultimonaprs init.d is set up but will not run'
 echo '           on boot until you run configure script to enable it. ****'
+# If you *REALLY* want to enable pymultimonaprs init.d before you configure
+# it, just run `sudo update-rc.d pymultimonaprs defaults`.  Remember, you
+# will first need to have configured the /etc/pymultimonaprs.conf first!
 
 
 
