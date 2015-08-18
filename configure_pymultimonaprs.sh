@@ -121,6 +121,13 @@ echo ''
 
 
 
+#enable init.d
+read -p 'Enable init.d for pymultimonaprs iGate to run on boot? [Y/n] ' enable_init_d
+enable_init_d="${enable_init_d:=y}"
+echo ''
+
+
+
 #print summary
 echo 'The following settings have been configured:'
 echo "RTL-SDR PPM  : $ppm"
@@ -129,11 +136,13 @@ echo "iGate Call   : $callsign"
 echo "APRS-IS Key  : $aprsKey"
 echo "Latitude     : $lat"
 echo "Longitude    : $lon"
+echo "Boot script? : $enable_init_d"
 echo ''
 
 
 
 #apply configuration
+echo 'Applying settings to /etc/pymultimonaprs.conf'
 sed -i "s/\"callsign\": [^,]*,/\"callsign\": \"$callsign\",/g" $CONFIG_FILE
 sed -i "s/\"passcode\": [^,]*,/\"passcode\": \"$aprsKey\",/g" $CONFIG_FILE
 sed -i "s/\"gateway\": [^,]*,/\"gateway\": \"$aprs_gateway:$aprs_gateway_port\",/g" $CONFIG_FILE
@@ -144,8 +153,16 @@ sed -i "s/\"lat\": [^,]*,/\"lat\": $lat,/g" $CONFIG_FILE
 sed -i "s/\"lng\": [^,]*,/\"lng\": $lon,/g" $CONFIG_FILE
 sed -i "s|\"text\": [^,]*,|\"text\": \"$status_text\",|g" $CONFIG_FILE
 
+#apply start-up scripts
+if [ "$enable_init_d" == "y" ] || [ "$enable_init_d" == "Y" ]
+then
+   echo 'Setting rc.d pymultimonaprs defaults'
+   update-rc.d pymultimonaprs defaults
+else
+   echo 'Removing pymultimonaprs from rc.d'
+   update-rc.d -f pymultimonaprs remove
+fi
 
 
 
-
-
+echo 'Done!'
