@@ -101,6 +101,27 @@ python setup.py install
 
 
 
+#Install init.d script template
+echo '**** Fetching init.d script template ****'
+cd $RTL_BUILD_DIR
+git clone https://github.com/fhd/init-script-template.git
+cd init-script-template
+echo '**** Configuring pymultimonaprs init.d from template ****'
+mkdir -p $RTL_BUILD_SDR/init.d
+cp template $RTL_BUILD_DIR/init.d
+cd $RTL_BUILD_DIR/init.d
+sed -i 's|cmd=""|cmd="/usr/local/bin/pymultimonaprs"|g' pymultimonaprs
+sed -i 's/user=""/user="aprs"/g' pymultimonaprs
+sed -i 's/# Provides:/# Provides: pymultimonaprs/g' pymultimonaprs
+sed -i 's/# Description:       Enable service provided by daemon./# Description:       Starts pymultimonaprs APRS iGate daemon/g' pymultimonaprs
+echo '**** Installing pymultimonaprs init.d ****'
+cp pymultimonaprs /etc/init.d/
+useradd -r -s /sbin/nologin -M aprs
+echo '**** NOTE: pymultimonaprs init.d is set up but will not run'
+echo '           on boot until you run configure script to enable it. ****'
+
+
+
 #Done!
 echo 'Install complete!'
 echo 'Please reboot and run config script . . .'
