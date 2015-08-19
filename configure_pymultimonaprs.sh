@@ -167,6 +167,12 @@ then
 else
    echo 'Removing pymultimonaprs from rc.d'
    update-rc.d -f pymultimonaprs remove
+   echo '********************************************************************'
+   echo '* It is recommended you try `debug_pymultimonaprs.sh` and verify   *'
+   echo '* packets are being received. Start-up is DISABLED, you will need  *'
+   echo '* to MANUALLY run `sudo service pymultimonaprs start` EVERY TIME   *'
+   echo '* you want to load the APRS iGate service.                         *'
+   echo '********************************************************************'
 fi
 
 
