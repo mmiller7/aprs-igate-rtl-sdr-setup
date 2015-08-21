@@ -17,7 +17,7 @@ resp=$(kal -s $BAND -g $GAIN $OPT | grep chan -m1)
 echo "$resp"
 #get numeric part
 chan=$(echo $resp | awk '{print $2}')
-if ! [[ "$chan" =~ '^[0-9]+$' ]] ; then
+if [[ "$chan" =~ ^[0-9]+$ ]] ; then
    echo "Found base station on channel $chan.  Calibrating . . ."
    #channel was 128 for me
    resp=$(kal -c $chan -g $GAIN $OPT -v | grep "average absolute error" -m1)
