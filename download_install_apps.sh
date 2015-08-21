@@ -107,8 +107,8 @@ cd $RTL_BUILD_DIR
 git clone https://github.com/fhd/init-script-template.git
 cd init-script-template
 echo '**** Configuring pymultimonaprs init.d from template ****'
-mkdir -p $RTL_BUILD_SDR/init.d
-cp template $RTL_BUILD_DIR/init.d
+mkdir -p $RTL_BUILD_DIR/init.d
+cp template $RTL_BUILD_DIR/init.d/pymultimonaprs
 cd $RTL_BUILD_DIR/init.d
 sed -i 's|cmd=""|cmd="/usr/local/bin/pymultimonaprs"|g' pymultimonaprs
 sed -i 's/user=""/user="aprs"/g' pymultimonaprs
