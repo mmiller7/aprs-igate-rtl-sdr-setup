@@ -17,7 +17,7 @@ fi
 
 #Install dependencies
 echo '**** Installing dependencies ****'
-apt-get -y install git build-essential cmake libusb-1.0-0-dev sox libtool autoconf automake libfftw3-dev qt4-qmake libpulse-dev libx11-dev python-pkg-resources
+apt-get -y install git build-essential cmake libusb-1.0-0-dev sox libtool autoconf automake libfftw3-dev qt4-qmake libpulse-dev libx11-dev python-pkg-resources bc
 
 
 
