@@ -5,6 +5,8 @@
 
 RTL_BUILD_DIR=~/rtl_build
 
+set -e
+
 if [ "$(whoami)" != "root" ]; then
 	echo "ERROR: This script be run as root!"
 	exit 1
