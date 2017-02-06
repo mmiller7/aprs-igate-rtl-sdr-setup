@@ -82,7 +82,7 @@ then
    read -p 'Enter APRS-IS key: ' aprsKey
    aprsKey="${aprsKey:=0}"
 else
-   keygenResult=$(rtl_build/pymultimonaprs/keygen.py $callsign)
+   keygenResult=$($RTL_BUILD_DIR/pymultimonaprs/keygen.py $callsign)
    echo "keygen.py - $keygenResult"
    aprsKey=$(echo $keygenResult | awk '{print $4}')
 fi
