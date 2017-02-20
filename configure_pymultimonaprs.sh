@@ -145,7 +145,7 @@ echo ''
 echo 'Applying settings to /etc/pymultimonaprs.conf'
 sed -i "s/\"callsign\": [^,]*,/\"callsign\": \"$callsign\",/g" $CONFIG_FILE
 sed -i "s/\"passcode\": [^,]*,/\"passcode\": \"$aprsKey\",/g" $CONFIG_FILE
-sed -i "s/\"gateway\": [^,]*,/\"gateway\": \"$aprs_gateway:$aprs_gateway_port\",/g" $CONFIG_FILE
+sed -i "s/\"gateway\": [^,]*,/\"gateway\": \[\"$aprs_gateway:$aprs_gateway_port\",/g" $CONFIG_FILE
 sed -i "s/\"freq\": [^,]*,/\"freq\": $freq,/g" $CONFIG_FILE
 sed -i "s/\"ppm\": [^,]*,/\"ppm\": $ppm,/g" $CONFIG_FILE
 sed -i "s/\"gain\": [^,]*,/\"gain\": $gain,/g" $CONFIG_FILE
