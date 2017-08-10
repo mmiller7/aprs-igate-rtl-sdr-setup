@@ -157,15 +157,18 @@ sed -i "s|\"text\": [^,]*,|\"text\": \"$status_text\",|g" $CONFIG_FILE
 if [ "$enable_init_d" == "y" ] || [ "$enable_init_d" == "Y" ]
 then
    echo 'Setting rc.d pymultimonaprs defaults'
+   update-rc.d pymultimonaprs defaults
+   update-rc.d pymultimonaprs enable
+   sudo systemctl enable pymultimonaprs
    echo '********************************************************************'
    echo '* It is recommended you try `debug_pymultimonaprs.sh` and verify   *'
    echo '* packets are being received. If everything appears to be working, *'
    echo '* you can then run `sudo service pymultimonaprs start` or wait     *'
    echo '* until your next reboot to kick off the background service.       *'
    echo '********************************************************************'
-   update-rc.d pymultimonaprs defaults
 else
    echo 'Removing pymultimonaprs from rc.d'
+   systemctl disable pymultimonaprs
    update-rc.d -f pymultimonaprs remove
    echo '********************************************************************'
    echo '* It is recommended you try `debug_pymultimonaprs.sh` and verify   *'
