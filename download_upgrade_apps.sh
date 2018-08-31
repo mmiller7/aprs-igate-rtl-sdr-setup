@@ -28,7 +28,15 @@ echo '**** Building RTL-SDR driver module ****'
 cmake .. -DINSTALL_UDEV_RULES=ON
 make
 echo '**** Installing RTL-SDR driver module ****'
-make install
+version=`date '+%Y%m%d'`
+echo "Attempting to build package rtl-sdr version $version"
+checkinstall -D --pkgname rtl-sdr --pkggroup rtl-sdr --provides rtl-sdr --pkgversion $version -y && (
+	echo "Installing newly built package"
+	dpkg -i rtl-sdr_*.deb
+) || (
+	echo "Failed to build package for install, falling back to basic make-install"
+	make install
+)
 ldconfig
 
 
@@ -44,8 +52,15 @@ echo '**** Building Kalibrate-RTL ****'
 ./configure
 make
 echo '**** Installing Kalibrate-RTL ****'
-make install
-
+version=`src/kal -h | head -1 | awk '{ print $2 }' | sed 's/,//g;s/^v//g'`
+echo "Attempting to build package multimon-ng version $version"
+checkinstall -D --pkgname kalibrate-sdr --pkggroup kalibrate-sdr --provides kal --pkgversion $version -y && (
+	echo "Installing newly built package"
+	dpkg -i kalibrate-sdr_*.deb
+) || (
+	echo "Failed to build package for install, falling back to basic make-install"
+	make install
+)
 
 
 #Install multimonNG decoder
@@ -59,9 +74,15 @@ echo '**** Building multimonNG decoder ****'
 qmake-qt4 ../multimon-ng.pro || qmake ../multimon-ng.pro
 make
 echo '**** Installing multimonNG decoder ****'
-make install
-
-
+version=`./multimon-ng -h 2>&1 | head -1 | awk '{ print $2 }'`
+echo "Attempting to build package multimon-ng version $version"
+checkinstall -D --pkgname multimon-ng --pkggroup multimon-ng --provides multimon-ng --pkgversion $version -y && (
+	echo "Installing newly built package"
+	dpkg -i multimon-ng_*.deb
+) || (
+	echo "Failed to build package for install, falling back to basic make-install"
+	make install
+)
 
 
 #Install APRS iGate software
